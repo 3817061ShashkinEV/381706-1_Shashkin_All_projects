@@ -1,7 +1,8 @@
 #include <iostream>
 #include "TVector.h"
 
-void main()
+int main()
 {
 	std::cout << "Hello world!\n";
+	return 0;
 }
