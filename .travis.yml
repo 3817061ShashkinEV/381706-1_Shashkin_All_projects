@@ -8,6 +8,6 @@ before_script:
 script:
   - cmake ../381706-1_Shashkin_All_projects
   - make -j
-  - ./All_projects
+  - ./Vector
 notifications:
   email: false
