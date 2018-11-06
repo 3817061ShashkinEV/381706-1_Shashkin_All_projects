@@ -29,10 +29,10 @@ public:
 	TVector<T>& operator=(TVector<T> &obj);
 	T& operator[] (int index);
 	
-	template <class T1>
+	template <class T>
 	friend std::istream& operator >> (std::istream &A, TVector<T> &B);
 	
-	template <class T1>
+	template <class T>
 	friend std::ostream& operator << (std::ostream &A, TVector<T> &B);
 }; //TVector
    // ---------------------------------------------------------------------------
@@ -254,7 +254,7 @@ T& TVector<T> ::operator[] (int index)
 	throw TMyException("Âûõîä çà ãðàíèöû âåêòîðà!\n");
 }
 // ---------------------------------------------------------------------------
-template <class T1>
+template <class T>
 std::istream& operator >> (std::istream &A, TVector<T> &B)
 {
 	std::cout << "Ââåäèòå ðàçìåð âåêòîðà: ";
@@ -266,7 +266,7 @@ std::istream& operator >> (std::istream &A, TVector<T> &B)
 	return A;
 }
 // ---------------------------------------------------------------------------
-template <class T1>
+template <class T>
 std::ostream& operator << (std::ostream &A, TVector<T> &B)
 {
 	A << "Ðàçìåð âåêòîðà: " << B.len << "\n";
