@@ -29,10 +29,10 @@ public:
 	TVector<T>& operator=(TVector<T> &obj);
 	T& operator[] (int index);
 	
-	template <class T>
+	template <class T1>
 	friend std::istream& operator >> (std::istream &A, TVector<T> &B);
 	
-	template <class T>
+	template <class T1>
 	friend std::ostream& operator << (std::ostream &A, TVector<T> &B);
 }; //TVector
    // ---------------------------------------------------------------------------
@@ -127,7 +127,7 @@ void TVector<T>::ChangeLenOfVector(int size, const char IncrOrDecr)
 		}
 	}
 	else
-		throw TMyException("Вторым параметром могут быть только '+'-увелечение размера вектора или '-'-умньшение размера вектора!\n");
+		throw TMyException("Г‚ГІГ®Г°Г»Г¬ ГЇГ Г°Г Г¬ГҐГІГ°Г®Г¬ Г¬Г®ГЈГіГІ ГЎГ»ГІГј ГІГ®Г«ГјГЄГ® '+'-ГіГўГҐГ«ГҐГ·ГҐГ­ГЁГҐ Г°Г Г§Г¬ГҐГ°Г  ГўГҐГЄГІГ®Г°Г  ГЁГ«ГЁ '-'-ГіГ¬Г­ГјГёГҐГ­ГЁГҐ Г°Г Г§Г¬ГҐГ°Г  ГўГҐГЄГІГ®Г°Г !\n");
 }
 // ---------------------------------------------------------------------------
 template <class T>
@@ -147,7 +147,7 @@ TVector<T> TVector<T>::operator+(TVector<T> &obj)
 		}
 	}
 	else
-		throw TMyException("Векторы разных размеров!\n");
+		throw TMyException("Г‚ГҐГЄГІГ®Г°Г» Г°Г Г§Г­Г»Гµ Г°Г Г§Г¬ГҐГ°Г®Гў!\n");
 	return rez;
 }
 // ---------------------------------------------------------------------------
@@ -168,7 +168,7 @@ TVector<T> TVector<T>::operator-(TVector<T> &obj)
 		}
 	}
 	else
-		throw TMyException("Векторы разных размеров!\n");;
+		throw TMyException("Г‚ГҐГЄГІГ®Г°Г» Г°Г Г§Г­Г»Гµ Г°Г Г§Г¬ГҐГ°Г®Гў!\n");;
 	return rez;
 }
 // ---------------------------------------------------------------------------
@@ -199,7 +199,7 @@ TVector<T>& TVector<T>::operator/(T num)
 		}
 	}
 	else
-		throw TMyException("На ноль делить нельзя!\n");
+		throw TMyException("ГЌГ  Г­Г®Г«Гј Г¤ГҐГ«ГЁГІГј Г­ГҐГ«ГјГ§Гї!\n");
 	return *this;
 }
 // ---------------------------------------------------------------------------
@@ -218,7 +218,7 @@ T TVector<T>::operator*(TVector<T> &obj)
 		}
 	}
 	else
-		throw TMyException("Векторы разных размеров!\n");;
+		throw TMyException("Г‚ГҐГЄГІГ®Г°Г» Г°Г Г§Г­Г»Гµ Г°Г Г§Г¬ГҐГ°Г®Гў!\n");;
 	return rez;
 }
 // ---------------------------------------------------------------------------
@@ -251,26 +251,26 @@ T& TVector<T> ::operator[] (int index)
 {
 	if (index >= 0 && index < len)
 		return vector[index];
-	throw TMyException("Выход за границы вектора!\n");
+	throw TMyException("Г‚Г»ГµГ®Г¤ Г§Г  ГЈГ°Г Г­ГЁГ¶Г» ГўГҐГЄГІГ®Г°Г !\n");
 }
 // ---------------------------------------------------------------------------
-template <class T>
+template <class T1>
 std::istream& operator >> (std::istream &A, TVector<T> &B)
 {
-	std::cout << "Введите размер вектора: ";
+	std::cout << "Г‚ГўГҐГ¤ГЁГІГҐ Г°Г Г§Г¬ГҐГ° ГўГҐГЄГІГ®Г°Г : ";
 	A >> B.len;
 	B.vector = new T[B.len];
-	std::cout << "Задайте вектор поэлементно: ";
+	std::cout << "Г‡Г Г¤Г Г©ГІГҐ ГўГҐГЄГІГ®Г° ГЇГ®ГЅГ«ГҐГ¬ГҐГ­ГІГ­Г®: ";
 	for (int i = 0; i<B.len; i++)
 		A >> B.vector[i];
 	return A;
 }
 // ---------------------------------------------------------------------------
-template <class T>
+template <class T1>
 std::ostream& operator << (std::ostream &A, TVector<T> &B)
 {
-	A << "Размер вектора: " << B.len << "\n";
-	A << "Вектор: (";
+	A << "ГђГ Г§Г¬ГҐГ° ГўГҐГЄГІГ®Г°Г : " << B.len << "\n";
+	A << "Г‚ГҐГЄГІГ®Г°: (";
 	for (int i = 0; i<B.len-1; i++)
 		A << B.vector[i] << ",";
 	A << B.vector[B.len - 1];
