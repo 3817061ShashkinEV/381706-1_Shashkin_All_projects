@@ -9,7 +9,6 @@ script:
   - cmake ../381706-1_Shashkin_All_projects
   - make -j
   - cd ./Vector
-  - cd ./VectorTest
-  - /VectorTest
+  - cd ./VectorTest/VectorTest
 notifications:
   email: false
