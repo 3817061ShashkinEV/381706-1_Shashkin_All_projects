@@ -29,10 +29,10 @@ public:
 	TVector<T>& operator=(TVector<T> &obj);
 	T& operator[] (int index);
 	
-	template <class T>
+	template <class T1>
 	friend std::istream& operator >> (std::istream &A, TVector<T> &B);
 	
-	template <class T>
+	template <class T1>
 	friend std::ostream& operator << (std::ostream &A, TVector<T> &B);
 }; //TVector
    // ---------------------------------------------------------------------------
