@@ -1,33 +1,31 @@
 #pragma once
 #include <iostream>
-#include <exception>
+#include <../MyExceptionLib/MyException.h>
 
-class TMyException :public std::exception
-{
-public:
-	TMyException(char *msg) :exception(msg) {}
-}; //TMyException
-   // ---------------------------------------------------------------------------
 template <class T>
 class TVector
 {
 	T* vector;
-	int len;
+	int size;
+  int StartIndex;
 public:
-	TVector();
-	TVector(int _len, T* _vector);
+	TVector(int _size=10, int _StartIndex=0);
 	TVector(TVector &obj);
 	~TVector();
-	void ClearVector();
-	int GetLen();
-	void ChangeLenOfVector(int size, const char IncrOrDecr);
+	int GetSize();
+  int GetStartIndex();
+  T& operator[] (int index);
+  bool operator==(TVector<T> &obj);
+  TVector<T>& operator=(TVector<T> &obj);
+  //Scalar operations
+  TVector<T> operator+(const T &Scalar);
+  TVector<T> operator-(const T &Scalar);
+  TVector<T> operator*(const T &Scalar);
+  //Vector operations
 	TVector<T> operator+(TVector<T> &obj);
 	TVector<T> operator-(TVector<T> &obj);
 	T operator*(TVector<T> &obj);
-	TVector<T>& operator*(T num);
-	TVector<T>& operator/(T num);
-	TVector<T>& operator=(TVector<T> &obj);
-	T& operator[] (int index);
+	
 	
 	template <class T1>
 	friend std::istream& operator >> (std::istream &A, TVector<T> &B);
@@ -35,35 +33,35 @@ public:
 	template <class T1>
 	friend std::ostream& operator << (std::ostream &A, TVector<T> &B);
 }; //TVector
-   // ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
 template <class T>
-TVector<T>::TVector()
+TVector<T>::TVector(int _size, int _StartIndex)
 {
-	vector = 0;
-	len = 0;
+  if (_size > 0)
+    if (_StartIndex >= 0)
+    {
+      vector = new T[_size];
+      size = _size;
+      StartIndex = _StartIndex;
+    }
+    else
+      throw TMyException("Error! Start index should not be negative!\n");
+  else
+    throw TMyException("Error! Size of vector must be positive!\n");
 }
 // ---------------------------------------------------------------------------
 template <class T>
 TVector<T>::TVector(TVector &obj)
 {
-	len = obj.len;
-	if (len != 0)
+	size = obj.size;
+	if (size != 0)
 	{
-		vector = new T[len];
-		for (int i = 0; i < len; i++)
+		vector = new T[size];
+		for (int i = 0; i < size; i++)
 			vector[i] = obj.vector[i];
 	}
 	else
 		vector = 0;
-}
-// ---------------------------------------------------------------------------
-template <class T>
-TVector<T>::TVector(int _len, T* _vector)
-{
-	len = _len;
-	vector = new T[len];
-	for (int i = 0; i < len; i++)
-		vector[i] = _vector[i];
 }
 // ---------------------------------------------------------------------------
 template <class T>
@@ -75,79 +73,126 @@ TVector<T>::~TVector()
 }
 // ---------------------------------------------------------------------------
 template <class T>
-void TVector<T>::ClearVector()
+int TVector<T>::GetSize()
 {
-	if (vector != 0)
-		delete[] vector;
-	vector = 0;
+	return size;
 }
 // ---------------------------------------------------------------------------
 template <class T>
-int TVector<T>::GetLen()
+int TVector<T>::GetStartIndex()
 {
-	return len;
+  return StartIndex;
 }
 // ---------------------------------------------------------------------------
 template <class T>
-void TVector<T>::ChangeLenOfVector(int size, const char IncrOrDecr)
+T& TVector<T> ::operator[] (int index)
 {
-	if (IncrOrDecr == '+' || IncrOrDecr == '-')
-	{
-		if (IncrOrDecr == '+')
-		{
-			if (vector != 0)
-			{
-				T* tmp = new T[len];;
-				for (int i = 0; i < len; i++)
-					tmp[i] = vector[i];
-				len += size;
-				delete[] vector;
-				vector = new T[len];
-				for (int i = 0; i < len - size; i++)
-					vector[i] = tmp[i];
-				delete[] tmp;
-				for (int i = len - size; i < len; i++)
-					vector[i] = 0;
-			}
-		}
-		else if (IncrOrDecr == '-')
-		{
-			if (vector != 0)
-			{
-				T* tmp = new T[len];;
-				for (int i = 0; i < len; i++)
-					tmp[i] = vector[i];
-				len -= size;
-				delete[] vector;
-				vector = new T[len];
-				for (int i = 0; i < len; i++)
-					vector[i] = tmp[i];
-				delete[] tmp;
-			}
-		}
-	}
-	else
-		throw TMyException("Âòîðûì ïàðàìåòðîì ìîãóò áûòü òîëüêî '+'-óâåëå÷åíèå ðàçìåðà âåêòîðà èëè '-'-óìíüøåíèå ðàçìåðà âåêòîðà!\n");
+  if (index >= 0 && index < size)
+    return vector[index];
+  throw TMyException("Error! Index is out of range!\n");
 }
+// ---------------------------------------------------------------------------
+template <class T>
+bool TVector<T>::operator==(TVector<T> &obj)
+{
+  if (size != obj.size)
+    return false;
+  else
+  {
+    for (int i = 0; i < size; i++)
+      if (vector[i] != obj.vectpr[i])
+        return false;
+  }
+  return true;
+}
+// ---------------------------------------------------------------------------
+template <class T>
+TVector<T>& TVector<T>::operator=(TVector<T> &obj)
+{
+  if (this != &obj)
+  {
+    size = obj.size;
+    if (size != 0)
+    {
+      if (vector != 0)
+        delete[] vector;
+      vector = new T[size];
+      for (int i = 0; i < size; i++)
+        vector[i] = obj.vector[i];
+    }
+    else
+    {
+      if (vector != 0)
+        delete[]vector;
+      vector = 0;
+    }
+  }
+  return *this;
+}
+// ---------------------------------------------------------------------------
+//Scalar operations
+// ---------------------------------------------------------------------------
+template <class T>
+TVector<T> TVector<T>::operator+(const T &Scalar)
+{
+  TVector<T> rez;
+  if (size == 0)
+    rez.vector = 0;
+  else
+  {
+    for (int i = 0; i < size:i++)
+      rez.vector[i] += Scalar;
+  }
+  return rez;
+}
+// ---------------------------------------------------------------------------
+template <class T>
+TVector<T> TVector<T>::operator-(const T &Scalar)
+{
+  if (size == 0)
+    rez.vector = 0;
+  else
+  {
+    for (int i = 0; i < size:i++)
+      rez.vector[i] -= Scalar;
+  }
+  return rez;
+}
+// ---------------------------------------------------------------------------
+template <class T>
+TVector<T> TVector<T>::operator*(const T &Scalar)
+{
+  TVector<T> rez;
+  if (size == 0)
+    rez.vector = 0;
+  else
+  {
+    for (int i = 0; i < size; i++)
+      rez.vector[i] *= Scalar;
+  }
+  return rez;
+}
+// ---------------------------------------------------------------------------
+//Vector operations
 // ---------------------------------------------------------------------------
 template <class T>
 TVector<T> TVector<T>::operator+(TVector<T> &obj)
 {
 	TVector<T> rez;
-	if (len == obj.len)
+	if (size == obj.size)
 	{
-		if (len == 0)
+		if (size == 0)
 			rez.vector = 0;
 		else
 		{
-			rez.len = len;
-			rez.vector = new T[rez.len];
-			for (int i = 0; i < rez.len; i++)
+			rez.size = size;
+			rez.vector = new T[rez.size];
+			for (int i = 0; i < rez.size; i++)
 				rez.vector[i] = vector[i] + obj.vector[i];
 		}
 	}
 	else
-		throw TMyException("Âåêòîðû ðàçíûõ ðàçìåðîâ!\n");
+		throw TMyException("Error! Vectors have different sizes!\n");
 	return rez;
 }
 // ---------------------------------------------------------------------------
@@ -155,113 +200,50 @@ template <class T>
 TVector<T> TVector<T>::operator-(TVector<T> &obj)
 {
 	TVector<T> rez;
-	if (len == obj.len)
+	if (size == obj.size)
 	{
-		if (len == 0)
+		if (size == 0)
 			rez.vector = 0;
 		else
 		{
-			rez.len = len;
-			rez.vector = new T[rez.len];
-			for (int i = 0; i < rez.len; i++)
+			rez.size = size;
+			rez.vector = new T[rez.size];
+			for (int i = 0; i < rez.size; i++)
 				rez.vector[i] = vector[i] - obj.vector[i];
 		}
 	}
 	else
-		throw TMyException("Âåêòîðû ðàçíûõ ðàçìåðîâ!\n");;
+		throw TMyException("Error! Vectors have different sizes!\n");;
 	return rez;
-}
-// ---------------------------------------------------------------------------
-template <class T>
-TVector<T>& TVector<T>::operator*(T num)
-{
-	if (len == 0)
-		vector = 0;
-	else
-	{
-		for (int i = 0; i < len; i++)
-			vector[i] *= num;
-	}
-	return *this;
-}
-// ---------------------------------------------------------------------------
-template <class T>
-TVector<T>& TVector<T>::operator/(T num)
-{
-	if (num != 0)
-	{
-		if (len == 0)
-			vector = 0;
-		else
-		{
-			for (int i = 0; i < len; i++)
-				vector[i] /= num;
-		}
-	}
-	else
-		throw TMyException("Íà íîëü äåëèòü íåëüçÿ!\n");
-	return *this;
 }
 // ---------------------------------------------------------------------------
 template <class T>
 T TVector<T>::operator*(TVector<T> &obj)
 {
 	T rez=0;
-	if (len == obj.len)
+	if (size == obj.size)
 	{
-		if (len == 0)
+		if (size == 0)
 			rez=0;
 		else
 		{
-			for (int i = 0; i < len; i++)
+			for (int i = 0; i < size; i++)
 				rez += (vector[i] * obj.vector[i]);
 		}
 	}
 	else
-		throw TMyException("Âåêòîðû ðàçíûõ ðàçìåðîâ!\n");;
+		throw TMyException("Error! Vectors have different sizes!\n");;
 	return rez;
-}
-// ---------------------------------------------------------------------------
-template <class T>
-TVector<T>& TVector<T>::operator=(TVector<T> &obj)
-{
-	if (this != &obj)
-	{
-		len = obj.len;
-		if (len != 0)
-		{
-			if (vector != 0)
-				delete[] vector;
-			vector = new T[len];
-			for (int i = 0; i < len; i++)
-				vector[i] = obj.vector[i];
-		}
-		else
-		{
-			if (vector != 0)
-				delete[]vector;
-			vector = 0;
-		}
-	}
-	return *this;
-}
-// ---------------------------------------------------------------------------
-template <class T>
-T& TVector<T> ::operator[] (int index)
-{
-	if (index >= 0 && index < len)
-		return vector[index];
-	throw TMyException("Âûõîä çà ãðàíèöû âåêòîðà!\n");
 }
 // ---------------------------------------------------------------------------
 template <class T>
 std::istream& operator >> (std::istream &A, TVector<T> &B)
 {
-	std::cout << "Ââåäèòå ðàçìåð âåêòîðà: ";
-	A >> B.len;
-	B.vector = new T[B.len];
-	std::cout << "Çàäàéòå âåêòîð ïîýëåìåíòíî: ";
-	for (int i = 0; i<B.len; i++)
+	std::cout << "Enter vector size: ";
+	A >> B.size;
+	B.vector = new T[B.size];
+	std::cout << "Set the vector elementwise : ";
+	for (int i = 0; i<B.size; i++)
 		A >> B.vector[i];
 	return A;
 }
@@ -269,11 +251,11 @@ std::istream& operator >> (std::istream &A, TVector<T> &B)
 template <class T>
 std::ostream& operator << (std::ostream &A, TVector<T> &B)
 {
-	A << "Ðàçìåð âåêòîðà: " << B.len << "\n";
-	A << "Âåêòîð: (";
-	for (int i = 0; i<B.len-1; i++)
+	A << "Size of vector: " << B.size << "\n";
+	A << "The Vector: (";
+	for (int i = 0; i<B.size-1; i++)
 		A << B.vector[i] << ",";
-	A << B.vector[B.len - 1];
+	A << B.vector[B.size - 1];
 	A << ")";
 	return A;
 }
