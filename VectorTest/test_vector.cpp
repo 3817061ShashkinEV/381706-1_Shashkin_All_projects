@@ -137,8 +137,8 @@ TEST(TVector, can_add_two_vector_with_equal_size)
     V1[i] = i;
     V2[i] = V2.GetSize() - i;
   }
-  tmp1 = V1 + V2;
-  tmp2 = V1 + V2;
+  tmp1 = (V1 + V2);
+  tmp2 = (V1 + V2);
   ASSERT_TRUE(tmp1 == tmp2);
 }
 // ---------------------------------------------------------------------------
@@ -156,8 +156,8 @@ TEST(TVector, can_substract_two_vector_with_equal_size)
     V1[i] = i;
     V2[i] = V2.GetSize() - i;
   }
-  tmp1 = V2 - V1;
-  tmp2 = V2 - V1;
+  tmp1 = (V2 - V1);
+  tmp2 = (V2 - V1);
   ASSERT_TRUE(tmp1 == tmp2);
 }
 // ---------------------------------------------------------------------------
