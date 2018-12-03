@@ -73,7 +73,7 @@ TEST(TVector, can_compare_vectors)
     V1[i] = i;
     V2[i] = i;
   }
-  EXPECT_EQ(1, V1 == V2);
+  ASSERT_TRUE(V1 == V2);
 }
 // ---------------------------------------------------------------------------
 TEST(TVector, can_compare_vectors_with_one_size_false)
@@ -84,7 +84,7 @@ TEST(TVector, can_compare_vectors_with_one_size_false)
     V1[i] = i;
     V2[i] = i+2;
   }
-  EXPECT_EQ(0, V1 == V2);
+  ASSERT_FALSE(V1 == V2);
 }
 // ---------------------------------------------------------------------------
 TEST(TVector, throw_when_compare_vectors_with_different_size)
@@ -97,7 +97,7 @@ TEST(TVector, can_assign_vector)
 {
   TVector<int> V1(10), V2(11);
   V1 = V2;
-  EXPECT_EQ(1,V1 == V2);
+  ASSERT_TRUE(V1 == V2);
 }
 // ---------------------------------------------------------------------------
 TEST(TVector, can_add_scalar_to_vector)
@@ -138,7 +138,7 @@ TEST(TVector, can_add_two_vector_with_equal_size)
     V2[i] = V2.GetSize() - i;
   }
   tmp = V1 + V2;
-  EXPECT_EQ(1, tmp == (V1 + V2));
+  ASSERT_TRUE(tmp == (V1 + V2));
 }
 // ---------------------------------------------------------------------------
 TEST(TVector, throw_when_add_two_vectors_with_defferent_size)
@@ -156,7 +156,7 @@ TEST(TVector, can_substract_two_vector_with_equal_size)
     V2[i] = V2.GetSize() - i;
   }
   tmp = V2 - V1;
-  EXPECT_EQ(1, tmp == (V2 - V1));
+  ASSERT_TRUE(tmp == (V2 - V1));
 }
 // ---------------------------------------------------------------------------
 TEST(TVector, throw_when_substract_two_vectors_with_defferent_size)
