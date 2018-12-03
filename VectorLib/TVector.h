@@ -22,9 +22,9 @@ public:
   TVector<T>& operator-(const T &Scalar);
   TVector<T>& operator*(const T &Scalar);
   //Vector operations
-  TVector<T> operator+(TVector<T> &obj);
-  TVector<T> operator-(TVector<T> &obj);
-  T operator*(TVector<T> &obj);
+  TVector<T> operator+(const TVector<T> &obj);
+  TVector<T> operator-(const TVector<T> &obj);
+  T operator*(const TVector<T> &obj);
 	
 	
   template <class T1>
@@ -177,7 +177,7 @@ TVector<T>& TVector<T>::operator*(const T &Scalar)
 //Vector operations
 // ---------------------------------------------------------------------------
 template <class T>
-TVector<T> TVector<T>::operator+(TVector<T> &obj)
+TVector<T> TVector<T>::operator+(const TVector<T> &obj)
 {
   TVector<T> rez;
   if (size == obj.size)
@@ -198,7 +198,7 @@ TVector<T> TVector<T>::operator+(TVector<T> &obj)
 }
 // ---------------------------------------------------------------------------
 template <class T>
-TVector<T> TVector<T>::operator-(TVector<T> &obj)
+TVector<T> TVector<T>::operator-(const TVector<T> &obj)
 {
   TVector<T> rez;
   if (size == obj.size)
@@ -219,7 +219,7 @@ TVector<T> TVector<T>::operator-(TVector<T> &obj)
 }
 // ---------------------------------------------------------------------------
 template <class T>
-T TVector<T>::operator*(TVector<T> &obj)
+T TVector<T>::operator*(const TVector<T> &obj)
 {
   T rez=0;
   if (size == obj.size)
