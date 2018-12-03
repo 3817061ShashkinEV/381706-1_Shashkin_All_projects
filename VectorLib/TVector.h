@@ -149,6 +149,7 @@ TVector<T> TVector<T>::operator+(const T &Scalar)
 template <class T>
 TVector<T> TVector<T>::operator-(const T &Scalar)
 {
+  TVector<T> rez;
   if (size == 0)
     rez.vector = 0;
   else
