@@ -53,15 +53,15 @@ TVector<T>::TVector(int _size, int _StartIndex)
 template <class T>
 TVector<T>::TVector(TVector &obj)
 {
-	size = obj.size;
-	if (size != 0)
-	{
-		vector = new T[size];
-		for (int i = 0; i < size; i++)
-			vector[i] = obj.vector[i];
-	}
-	else
-		vector = 0;
+  size = obj.size;
+  if (size != 0)
+  {
+    vector = new T[size];
+    for (int i = 0; i < size; i++)
+      vector[i] = obj.vector[i];
+  }
+  else
+    vector = 0;
 }
 // ---------------------------------------------------------------------------
 template <class T>
@@ -181,18 +181,18 @@ TVector<T> TVector<T>::operator+(TVector<T> &obj)
   TVector<T> rez;
   if (size == obj.size)
   {
-	  if (size == 0)
-		  rez.vector = 0;
-	  else
-	  {
-		  rez.size = size;
-		  rez.vector = new T[rez.size];
-		  for (int i = 0; i < rez.size; i++)
-			  rez.vector[i] = vector[i] + obj.vector[i];
-	  }
+    if (size == 0)
+      rez.vector = 0;
+    else
+    {
+      rez.size = size;
+      rez.vector = new T[rez.size];
+      for (int i = 0; i < rez.size; i++)
+        rez.vector[i] = vector[i] + obj.vector[i];
+    }
   }
   else
-	  throw TMyException("Error! Vectors have different sizes!\n");
+    throw TMyException("Error! Vectors have different sizes!\n");
   return rez;
 }
 // ---------------------------------------------------------------------------
@@ -202,18 +202,18 @@ TVector<T> TVector<T>::operator-(TVector<T> &obj)
   TVector<T> rez;
   if (size == obj.size)
   {
-	  if (size == 0)
-		  rez.vector = 0;
-	  else
-	  {
-		  rez.size = size;
-		  rez.vector = new T[rez.size];
-		  for (int i = 0; i < rez.size; i++)
-			  rez.vector[i] = vector[i] - obj.vector[i];
-	  }
+    if (size == 0)
+      rez.vector = 0;
+    else
+    {
+      rez.size = size;
+      rez.vector = new T[rez.size];
+      for (int i = 0; i < rez.size; i++)
+        rez.vector[i] = vector[i] - obj.vector[i];
+    }
   }
   else
-	  throw TMyException("Error! Vectors have different sizes!\n");;
+    throw TMyException("Error! Vectors have different sizes!\n");;
   return rez;
 }
 // ---------------------------------------------------------------------------
