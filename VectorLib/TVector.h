@@ -16,7 +16,7 @@ public:
   int GetStartIndex();
   T& operator[] (int index);
   bool operator==(TVector<T> &obj);
-  TVector<T>& operator=(TVector<T> &obj);
+  TVector<T>& operator=(const TVector<T> &obj);
   //Scalar operations
   TVector<T>& operator+(const T &Scalar);
   TVector<T>& operator-(const T &Scalar);
@@ -109,7 +109,7 @@ bool TVector<T>::operator==(TVector<T> &obj)
 }
 // ---------------------------------------------------------------------------
 template <class T>
-TVector<T>& TVector<T>::operator=(TVector<T> &obj)
+TVector<T>& TVector<T>::operator=(const TVector<T> &obj)
 {
   if (this != &obj)
   {
