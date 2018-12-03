@@ -18,9 +18,9 @@ public:
   bool operator==(TVector<T> &obj);
   TVector<T>& operator=(TVector<T> &obj);
   //Scalar operations
-  TVector<T> operator+(const T &Scalar);
-  TVector<T> operator-(const T &Scalar);
-  TVector<T> operator*(const T &Scalar);
+  TVector<T>& operator+(const T &Scalar);
+  TVector<T>& operator-(const T &Scalar);
+  TVector<T>& operator*(const T &Scalar);
   //Vector operations
   TVector<T> operator+(TVector<T> &obj);
   TVector<T> operator-(TVector<T> &obj);
@@ -38,14 +38,16 @@ template <class T>
 TVector<T>::TVector(int _size, int _StartIndex)
 {
   if (_size > 0)
-    if (_StartIndex >= 0)
+    if (_StartIndex >= 0 && _StartIndex<_size)
     {
       vector = new T[_size];
       size = _size;
+      for (int i = 0; i < size; i++)
+        vector[i] = 0;
       StartIndex = _StartIndex;
     }
     else
-      throw TMyException("Error! Start index should not be negative!\n");
+      throw TMyException("Error! Start index should not be negative or large than size!\n");
   else
     throw TMyException("Error! Size of vector must be positive!\n");
 }
@@ -96,7 +98,7 @@ template <class T>
 bool TVector<T>::operator==(TVector<T> &obj)
 {
   if (size != obj.size)
-    return false;
+    throw TMyException("Error! Vectors have different sizes!\n)");
   else
   {
     for (int i = 0; i < size; i++)
@@ -133,45 +135,43 @@ TVector<T>& TVector<T>::operator=(TVector<T> &obj)
 //Scalar operations
 // ---------------------------------------------------------------------------
 template <class T>
-TVector<T> TVector<T>::operator+(const T &Scalar)
+TVector<T>& TVector<T>::operator+(const T &Scalar)
 {
-  TVector<T> rez;
   if (size == 0)
-    rez.vector = 0;
+    vector = 0;
   else
   {
     for (int i = 0; i < size; i++)
-      rez.vector[i] += Scalar;
+      vector[i] += Scalar;
   }
-  return rez;
+  return *this;
 }
 // ---------------------------------------------------------------------------
 template <class T>
-TVector<T> TVector<T>::operator-(const T &Scalar)
+TVector<T>& TVector<T>::operator-(const T &Scalar)
 {
-  TVector<T> rez;
   if (size == 0)
-    rez.vector = 0;
+    vector = 0;
   else
   {
     for (int i = 0; i < size; i++)
-      rez.vector[i] -= Scalar;
+      vector[i] -= Scalar;
   }
-  return rez;
+  return *this;
 }
 // ---------------------------------------------------------------------------
 template <class T>
-TVector<T> TVector<T>::operator*(const T &Scalar)
+TVector<T>& TVector<T>::operator*(const T &Scalar)
 {
-  TVector<T> rez;
+  
   if (size == 0)
-    rez.vector = 0;
+    vector = 0;
   else
   {
     for (int i = 0; i < size; i++)
-      rez.vector[i] *= Scalar;
+      vector[i] *= Scalar;
   }
-  return rez;
+  return *this;
 }
 // ---------------------------------------------------------------------------
 //Vector operations
