@@ -15,7 +15,7 @@ public:
   int GetSize();
   int GetStartIndex();
   T& operator[] (int index);
-  bool operator==(TVector<T> &obj);
+  bool operator==(const TVector<T> &obj);
   TVector<T>& operator=(const TVector<T> &obj);
   //Scalar operations
   TVector<T>& operator+(const T &Scalar);
@@ -95,7 +95,7 @@ T& TVector<T> ::operator[] (int index)
 }
 // ---------------------------------------------------------------------------
 template <class T>
-bool TVector<T>::operator==(TVector<T> &obj)
+bool TVector<T>::operator==(const TVector<T> &obj)
 {
   if (size != obj.size)
     throw TMyException("Error! Vectors have different sizes!\n)");
