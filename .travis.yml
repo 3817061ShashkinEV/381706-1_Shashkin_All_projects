@@ -8,8 +8,7 @@ before_script:
 script:
   - cmake ../381706-1_Shashkin_All_projects
   - make -j
-  - cd ./Vector
-  - cd ../
-  - cd ./VectorTest
+  - ./Vector/Vector
+  - ./VectorTest/VectorTest
 notifications:
   email: false
