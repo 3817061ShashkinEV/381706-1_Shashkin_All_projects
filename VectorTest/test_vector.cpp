@@ -131,15 +131,14 @@ TEST(TVector, can_multiply_vector_on_scalar)
 // ---------------------------------------------------------------------------
 TEST(TVector, can_add_two_vector_with_equal_size)
 {
-  TVector<int> V1(3), V2(3), tmp1(3), tmp2(3);
+  TVector<int> V1(3), V2(3), tmp(3);
   for (int i = 0; i < V1.GetSize(); i++)
   {
     V1[i] = i;
     V2[i] = V2.GetSize() - i;
   }
-  tmp1 = (V1 + V2);
-  tmp2 = (V1 + V2);
-  ASSERT_TRUE(tmp1 == tmp2);
+  tmp = V1 + V2;
+  ASSERT_TRUE(tmp == (V1+V2));
 }
 // ---------------------------------------------------------------------------
 TEST(TVector, throw_when_add_two_vectors_with_defferent_size)
@@ -150,15 +149,14 @@ TEST(TVector, throw_when_add_two_vectors_with_defferent_size)
 // ---------------------------------------------------------------------------
 TEST(TVector, can_substract_two_vector_with_equal_size)
 {
-  TVector<int> V1(3), V2(3), tmp1(3), tmp2(3);
+  TVector<int> V1(3), V2(3), tmp(3);
   for (int i = 0; i < V1.GetSize(); i++)
   {
     V1[i] = i;
     V2[i] = V2.GetSize() - i;
   }
-  tmp1 = (V2 - V1);
-  tmp2 = (V2 - V1);
-  ASSERT_TRUE(tmp1 == tmp2);
+  tmp = V2 - V1;
+  ASSERT_TRUE(tmp == (V2-V1));
 }
 // ---------------------------------------------------------------------------
 TEST(TVector, throw_when_substract_two_vectors_with_defferent_size)
