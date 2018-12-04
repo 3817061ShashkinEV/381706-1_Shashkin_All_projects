@@ -8,6 +8,10 @@ set(Vector Vector)
 set(VectorLib VectorLib)
 set(VectorTest VectorTest)
 
+set(Matrix Matrix)
+set(MatrixLib MatrixLib)
+set(MatrixTest MatrixTest)
+
 set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "Configs" FORCE)
 if(NOT CMAKE_BUILD_TYPE) 
  set(CMAKE_BUILD_TYPE Release) 
@@ -21,6 +25,12 @@ add_subdirectory(Vector)
 add_subdirectory(VectorLib)
 add_subdirectory(VectorTest)
 add_subdirectory(gtest)
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/MatrixLib)
+add_subdirectory(Matrix)
+add_subdirectory(MatrixLib)
+add_subdirectory(MatrixTest)
+
 
 
 
