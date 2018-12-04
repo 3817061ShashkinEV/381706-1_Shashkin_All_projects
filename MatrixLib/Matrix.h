@@ -24,7 +24,7 @@ public:
 };//TMatrix
 // ---------------------------------------------------------------------------
 template <class T>
-TMatrix<T>::TMatrix(int _size) : TVector<TVector<T>> (_size)
+TMatrix<T>::TMatrix(int _size) : TVector<TVector<T> > (_size)
 {
   if (_size > 0)
     for (int i = 0; i < _size; i++)
@@ -34,10 +34,10 @@ TMatrix<T>::TMatrix(int _size) : TVector<TVector<T>> (_size)
 }
 // ---------------------------------------------------------------------------
 template <class T>
-TMatrix<T>::TMatrix(const TMatrix<T> &obj) : TVector<TVector<T>>(obj) {}
+TMatrix<T>::TMatrix(const TMatrix<T> &obj) : TVector<TVector<T> >(obj) {}
 // ---------------------------------------------------------------------------
 template <class T>
-TMatrix<T>::TMatrix(const TVector<TVector<T> > &obj) : TVector<TVector<T>>(obj) {}
+TMatrix<T>::TMatrix(const TVector<TVector<T> > &obj) : TVector<TVector<T> >(obj) {}
 // ---------------------------------------------------------------------------
 template <class T>
 bool TMatrix<T>::operator==(const TMatrix<T> &obj)
@@ -48,7 +48,7 @@ bool TMatrix<T>::operator==(const TMatrix<T> &obj)
 template <class T>
 TMatrix<T>& TMatrix<T>::operator=(const TMatrix<T> &obj)
 {
-  TVector<TVector<T>>::operator=(obj);
+  TVector<TVector<T> >::operator=(obj);
   return *this;
 }
 // ---------------------------------------------------------------------------
@@ -58,7 +58,7 @@ TMatrix<T> TMatrix<T>::operator+(const TMatrix<T> &obj)
   if (size != obj.size)
     throw TMyException("Error! Matrices have different sizes!\n");
   else
-    return TVector<TVector<T>>::operator+(obj);
+    return TVector<TVector<T> >::operator+(obj);
   
 }
 // ---------------------------------------------------------------------------
@@ -68,7 +68,7 @@ TMatrix<T> TMatrix<T>::operator-(const TMatrix<T> &obj)
   if (size != obj.size)
     throw TMyException("Error! Matrices have different sizes!\n");
   else
-    return TVector<TVector<T>>::operator-(obj);
+    return TVector<TVector<T> >::operator-(obj);
 }
 // ---------------------------------------------------------------------------
 template <class T>
@@ -77,7 +77,7 @@ TMatrix<T> TMatrix<T>::operator*(const TMatrix<T> &obj)
   if (size != obj.size)
     throw TMyException("Error! Matrices have different sizes!\n");
   else
-    return TVector<TVector<T>>::operator*(obj);
+    return TVector<TVector<T> >::operator*(obj);
 }
 // ---------------------------------------------------------------------------
 template <class T>
