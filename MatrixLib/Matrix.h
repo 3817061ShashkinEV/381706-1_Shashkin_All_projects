@@ -4,12 +4,12 @@
 #include <../MyExceptionLib/MyException.h>
 
 template <class T>
-class TMatrix : public TVector<TVector<T>>
+class TMatrix : public TVector<TVector<T> >
 {
 public:
   TMatrix(int _size = 10);
   TMatrix(const TMatrix<T> &obj);
-  TMatrix(const TVector<TVector<T>> &obj);
+  TMatrix(const TVector<TVector<T> > &obj);
   bool operator==(const TMatrix<T> &obj);
   TMatrix<T>& operator=(const TMatrix<T> &obj);
   TMatrix<T> operator+(const TMatrix<T> &obj);
@@ -37,7 +37,7 @@ template <class T>
 TMatrix<T>::TMatrix(const TMatrix<T> &obj) : TVector<TVector<T>>(obj) {}
 // ---------------------------------------------------------------------------
 template <class T>
-TMatrix<T>::TMatrix(const TVector<TVector<T>> &obj) : TVector<TVector<T>>(obj) {}
+TMatrix<T>::TMatrix(const TVector<TVector<T> > &obj) : TVector<TVector<T>>(obj) {}
 // ---------------------------------------------------------------------------
 template <class T>
 bool TMatrix<T>::operator==(const TMatrix<T> &obj)
