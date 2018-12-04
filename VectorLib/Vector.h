@@ -5,12 +5,13 @@
 template <class T>
 class TVector
 {
+protected:
   T* vector;
   int size;
   int StartIndex;
 public:
   TVector(int _size=10, int _StartIndex=0);
-  TVector(TVector &obj);
+  TVector(TVector<T> &obj);
   ~TVector();
   int GetSize();
   int GetStartIndex();
@@ -238,25 +239,25 @@ T TVector<T>::operator*(const TVector<T> &obj)
 }
 // ---------------------------------------------------------------------------
 template <class T>
-std::istream& operator >> (std::istream &A, TVector<T> &B)
+std::istream& operator >> (std::istream &istr, TVector<T> &Vec)
 {
   std::cout << "Enter vector size: ";
-  A >> B.size;
-  B.vector = new T[B.size];
+  istr >> Vec.size;
+  Vec.vector = new T[Vec.size];
   std::cout << "Set the vector elementwise : ";
-  for (int i = 0; i<B.size; i++)
-    A >> B.vector[i];
-  return A;
+  for (int i = 0; i<Vec.size; i++)
+    istr >> Vec.vector[i];
+  return istr;
 }
 // ---------------------------------------------------------------------------
 template <class T>
-std::ostream& operator << (std::ostream &A, TVector<T> &B)
+std::ostream& operator << (std::ostream &ostr, TVector<T> &Vec)
 {
-  A << "Size of vector: " << B.size << "\n";
-  A << "The Vector: (";
-  for (int i = 0; i<B.size-1; i++)
-    A << B.vector[i] << ",";
-  A << B.vector[B.size - 1];
-  A << ")";
-  return A;
+  ostr << "Size of vector: " << Vec.size << "\n";
+  ostr << "The Vector: (";
+  for (int i = 0; i<Vec.size-1; i++)
+    ostr << Vec.vector[i] << ",";
+  ostr << Vec.vector[Vec.size - 1];
+  ostr << ")";
+  return ostr;
 }
