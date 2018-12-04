@@ -3,5 +3,5 @@
 
 TEST(Matrix, can_create_matrix_with_positive_size)
 {
-  ASSERT_NO_THROW(TMatrix<TVector<int>> M);
+  ASSERT_NO_THROW(TMatrix<TVector<int> > M);
 }

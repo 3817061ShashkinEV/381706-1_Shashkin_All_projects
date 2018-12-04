@@ -27,7 +27,6 @@ public:
   TVector<T> operator-(const TVector<T> &obj);
   T operator*(const TVector<T> &obj);
 	
-	
   template <class T1>
   friend std::istream& operator >> (std::istream &A, TVector<T> &B);
 	
