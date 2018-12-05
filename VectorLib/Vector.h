@@ -8,9 +8,9 @@ class TVector
 protected:
   T* vector;
   int size;
-  int StartIndex;
+  int startIndex;
 public:
-  TVector(int _size=10, int _StartIndex=0);
+  TVector(int _size=10, int _startIndex=0);
   TVector(TVector<T> &obj);
   ~TVector();
   int GetSize();
@@ -35,16 +35,16 @@ public:
 }; //TVector
 // ---------------------------------------------------------------------------
 template <class T>
-TVector<T>::TVector(int _size, int _StartIndex)
+TVector<T>::TVector(int _size, int _startIndex)
 {
   if (_size > 0)
-    if (_StartIndex >= 0 && _StartIndex<_size)
+    if (_startIndex >= 0 && _startIndex<_size)
     {
       vector = new T[_size];
       size = _size;
       for (int i = 0; i < size; i++)
         vector[i] = 0;
-      StartIndex = _StartIndex;
+      startIndex = _startIndex;
     }
     else
       throw TMyException("Error! Start index should not be negative or large than size!\n");
@@ -83,7 +83,7 @@ int TVector<T>::GetSize()
 template <class T>
 int TVector<T>::GetStartIndex()
 {
-  return StartIndex;
+  return startIndex;
 }
 // ---------------------------------------------------------------------------
 template <class T>
@@ -135,33 +135,33 @@ TVector<T>& TVector<T>::operator=(const TVector<T> &obj)
 //Scalar operations
 // ---------------------------------------------------------------------------
 template <class T>
-TVector<T>& TVector<T>::operator+(const T &Scalar)
+TVector<T>& TVector<T>::operator+(const T &scalar)
 {
   if (size == 0)
     vector = 0;
   else
   {
     for (int i = 0; i < size; i++)
-      vector[i] += Scalar;
+      vector[i] += scalar;
   }
   return *this;
 }
 // ---------------------------------------------------------------------------
 template <class T>
-TVector<T>& TVector<T>::operator-(const T &Scalar)
+TVector<T>& TVector<T>::operator-(const T &scalar)
 {
   if (size == 0)
     vector = 0;
   else
   {
     for (int i = 0; i < size; i++)
-      vector[i] -= Scalar;
+      vector[i] -= scalar;
   }
   return *this;
 }
 // ---------------------------------------------------------------------------
 template <class T>
-TVector<T>& TVector<T>::operator*(const T &Scalar)
+TVector<T>& TVector<T>::operator*(const T &scalar)
 {
   
   if (size == 0)
@@ -169,7 +169,7 @@ TVector<T>& TVector<T>::operator*(const T &Scalar)
   else
   {
     for (int i = 0; i < size; i++)
-      vector[i] *= Scalar;
+      vector[i] *= scalar;
   }
   return *this;
 }
@@ -238,25 +238,25 @@ T TVector<T>::operator*(const TVector<T> &obj)
 }
 // ---------------------------------------------------------------------------
 template <class T>
-std::istream& operator >> (std::istream &istr, TVector<T> &Vec)
+std::istream& operator >> (std::istream &istr, TVector<T> &vec)
 {
   std::cout << "Enter vector size: ";
-  istr >> Vec.size;
-  Vec.vector = new T[Vec.size];
+  istr >> vec.size;
+  vec.vector = new T[vec.size];
   std::cout << "Set the vector elementwise : ";
-  for (int i = 0; i<Vec.size; i++)
-    istr >> Vec.vector[i];
+  for (int i = 0; i<vec.size; i++)
+    istr >> vec.vector[i];
   return istr;
 }
 // ---------------------------------------------------------------------------
 template <class T>
-std::ostream& operator << (std::ostream &ostr, TVector<T> &Vec)
+std::ostream& operator << (std::ostream &ostr, TVector<T> &vec)
 {
-  ostr << "Size of vector: " << Vec.size << "\n";
+  ostr << "Size of vector: " << vec.size << "\n";
   ostr << "The Vector: (";
-  for (int i = 0; i<Vec.size-1; i++)
-    ostr << Vec.vector[i] << ",";
-  ostr << Vec.vector[Vec.size - 1];
+  for (int i = 0; i<vec.size-1; i++)
+    ostr << vec.vector[i] << ",";
+  ostr << vec.vector[vec.size - 1];
   ostr << ")";
   return ostr;
 }

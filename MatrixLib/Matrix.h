@@ -17,10 +17,10 @@ public:
   TMatrix<T> operator*(const TMatrix<T> &obj);
 
   template <class T1>
-  friend std::istream& operator >> (std::istream &A, TMatrix<T> &B);
+  friend std::istream& operator >> (std::istream &istr, TMatrix<T> &matrix);
 
   template <class T1>
-  friend std::ostream& operator << (std::ostream &A, TMatrix<T> &B);
+  friend std::ostream& operator << (std::ostream &ostr, TMatrix<T> &matrix);
 };//TMatrix
 // ---------------------------------------------------------------------------
 template <class T>
@@ -81,20 +81,20 @@ TMatrix<T> TMatrix<T>::operator*(const TMatrix<T> &obj)
 }
 // ---------------------------------------------------------------------------
 template <class T>
-std::istream& operator >> (std::istream &istr, TMatrix<T> &Matrix)
+std::istream& operator >> (std::istream &istr, TMatrix<T> &matrix)
 {
-  for (int i = 0; i < Matrix.size; i++)
-    istr >> Matrix.vector[i];
+  for (int i = 0; i < matrix.size; i++)
+    istr >> matrix.vector[i];
   return istr;
 }
 // ---------------------------------------------------------------------------
 template <class T>
-std::ostream& operator << (std::ostream &ostr, TMatrix<T> &Matrix)
+std::ostream& operator << (std::ostream &ostr, TMatrix<T> &matrix)
 {
-  for (int i = 0; i < Matrix.size; i++)
+  for (int i = 0; i < matrix.size; i++)
   {
-    ostr << Matrix.vector[i];
-    if (i != Matrix.size - 1)
+    ostr << matrix.vector[i];
+    if (i != matrix.size - 1)
       ostr << " ";
     else
       ostr << "\n";
