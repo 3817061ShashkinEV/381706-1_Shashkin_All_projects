@@ -18,7 +18,7 @@ public:
 };//TElem
 // ---------------------------------------------------------------------------
 template <class T>
-TElem<T>::TElem(T _elem = 0, TElem<T>* _next = 0)
+TElem<T>::TElem(T _elem, TElem<T>* _next)
 {
   elem = _elem;
   next = _next;
