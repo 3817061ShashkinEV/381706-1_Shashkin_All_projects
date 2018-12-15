@@ -11,16 +11,6 @@ TEST(Vector, throw_when_create_vector_with_negative_size)
   ASSERT_ANY_THROW(TVector<int> vector(-10));
 }
 // ---------------------------------------------------------------------------
-TEST(Vector, throw_when_create_vector_with_negative_startindex)
-{
-  ASSERT_ANY_THROW(TVector<int> vector(10,-5));
-}
-// ---------------------------------------------------------------------------
-TEST(Vector, throw_when_create_vector_with_startindex_large_than_size)
-{
-  ASSERT_ANY_THROW(TVector<int> vector(10, 11));
-}
-// ---------------------------------------------------------------------------
 TEST(Vector, can_create_copied_vector)
 {
   TVector<int> vector1(10);
@@ -31,12 +21,6 @@ TEST(Vector, can_get_size)
 {
   TVector<int> vector(10);
   EXPECT_EQ(10, vector.GetSize());
-}
-// ---------------------------------------------------------------------------
-TEST(Vector, can_get_startindex)
-{
-  TVector<int> vector(10,5);
-  EXPECT_EQ(5, vector.GetStartIndex());
 }
 // ---------------------------------------------------------------------------
 TEST(Vector, throw_when_return_element_of_vector_with_negative_index)
@@ -87,10 +71,10 @@ TEST(Vector, can_compare_vectors_with_one_size_false)
   ASSERT_FALSE(vector1 == vector2);
 }
 // ---------------------------------------------------------------------------
-TEST(Vector, throw_when_compare_vectors_with_different_size)
+TEST(Vector, can_compare_compare_vectors_with_different_size_false)
 {
   TVector<int> vector1(10), vector2(11);
-  ASSERT_ANY_THROW(vector1 == vector2);
+  ASSERT_FALSE(vector1 == vector2);
 }
 // ---------------------------------------------------------------------------
 TEST(Vector, can_assign_vector)
