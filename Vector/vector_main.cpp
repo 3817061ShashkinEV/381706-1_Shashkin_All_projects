@@ -74,10 +74,12 @@ int main()
   {
     ex.what();
   }
+  /*
   std::cout << "-----------------------------input/output----------------------------------\n";
   TVector<int> vector(5);
   std::cout << "Enter vector with size equals 5: \n";
   std::cin >> vector;
   std::cout << "\nVector entered by you: \n" << vector << "\n";
 	return 0;
+  */
 }
