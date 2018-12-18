@@ -11,11 +11,11 @@ public:
   TMatrix(TMatrix<T> &obj);
   TMatrix(TVector<TVector<T> > &obj);
   bool operator==(const TMatrix<T> &obj);
-  TMatrix& operator=(const TMatrix<T> &obj);
-  TMatrix operator+(const TMatrix<T> &obj);
-  TMatrix operator-(const TMatrix<T> &obj);
-  TMatrix operator*(const TMatrix<T> &obj);
-  TMatrix operator/(TMatrix<T> &obj);
+  TMatrix<T>& operator=(const TMatrix<T> &obj);
+  TMatrix<T> operator+(const TMatrix<T> &obj);
+  TMatrix<T> operator-(const TMatrix<T> &obj);
+  TMatrix<T> operator*(const TMatrix<T> &obj);
+  TMatrix<T> operator/(TMatrix<T> &obj);
 
   template <class T1>
   friend std::istream& operator >> (std::istream &istr, TMatrix<T1> &matrix);
@@ -100,6 +100,7 @@ TMatrix<T> TMatrix<T>::operator/(TMatrix<T> &obj)
     throw TMyException("Error! Determinant of the right matrix equals zero!\n");
   TMatrix<T> copyObj(obj);
   TMatrix<T> rez(this->size);
+  TMatrix<T> copy(*this);
   for (int i = 0; i < this->size; i++)
   {
     rez[i][0] = 1;
@@ -119,7 +120,8 @@ TMatrix<T> TMatrix<T>::operator/(TMatrix<T> &obj)
         rez[j][k] = rez[j][k] - rez[i][l++] * tmp;
       }
     }
-  return ((*this)*rez);
+  rez = copy*rez;
+  return rez;
 }
 // ---------------------------------------------------------------------------
 template <class T1>
