@@ -11,11 +11,11 @@ public:
   TMatrix(TMatrix<T> &obj);
   TMatrix(TVector<TVector<T> > &obj);
   bool operator==(const TMatrix<T> &obj);
-  TMatrix<T>& operator=(const TMatrix<T> &obj);
-  TMatrix<T> operator+(const TMatrix<T> &obj);
-  TMatrix<T> operator-(const TMatrix<T> &obj);
-  TMatrix<T> operator*(const TMatrix<T> &obj);
-  TMatrix<T> operator/(TMatrix<T> &obj);
+  TMatrix& operator=(const TMatrix<T> &obj);
+  TMatrix operator+(const TMatrix<T> &obj);
+  TMatrix operator-(const TMatrix<T> &obj);
+  TMatrix operator*(const TMatrix<T> &obj);
+  TMatrix operator/(TMatrix<T> &obj);
 
   template <class T1>
   friend std::istream& operator >> (std::istream &istr, TMatrix<T1> &matrix);
