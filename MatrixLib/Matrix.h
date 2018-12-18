@@ -8,8 +8,8 @@ class TMatrix : public TVector<TVector<T> >
 {
 public:
   TMatrix(int _size = 10);
-  TMatrix(TMatrix<T> &obj);
-  TMatrix(TVector<TVector<T> > &obj);
+  TMatrix(const TMatrix<T> &obj);
+  TMatrix(const TVector<TVector<T> > &obj);
   bool operator==(const TMatrix<T> &obj);
   TMatrix<T>& operator=(const TMatrix<T> &obj);
   TMatrix<T> operator+(const TMatrix<T> &obj);
@@ -35,10 +35,10 @@ TMatrix<T>::TMatrix(int _size) : TVector<TVector<T> > (_size)
 }
 // ---------------------------------------------------------------------------
 template <class T>
-TMatrix<T>::TMatrix(TMatrix<T> &obj) : TVector<TVector<T> >(obj) {}
+TMatrix<T>::TMatrix(const TMatrix<T> &obj) : TVector<TVector<T> >(obj) {}
 // ---------------------------------------------------------------------------
 template <class T>
-TMatrix<T>::TMatrix(TVector<TVector<T> > &obj) : TVector<TVector<T> >(obj) {}
+TMatrix<T>::TMatrix(const TVector<TVector<T> > &obj) : TVector<TVector<T> >(obj) {}
 // ---------------------------------------------------------------------------
 template <class T>
 bool TMatrix<T>::operator==(const TMatrix<T> &obj)
