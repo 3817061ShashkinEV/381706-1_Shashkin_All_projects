@@ -10,7 +10,7 @@ protected:
   int size;
 public:
   TVector(int _size=10);
-  TVector(TVector<T> &obj);
+  TVector(const TVector<T> &obj);
   ~TVector();
   int GetSize();
   T& operator[] (int index);
@@ -57,7 +57,7 @@ TVector<T>::TVector(int _size)
 }
 // ---------------------------------------------------------------------------
 template <class T>
-TVector<T>::TVector(TVector &obj)
+TVector<T>::TVector(const TVector &obj)
 {
   size = obj.size;
   if (size != 0)
