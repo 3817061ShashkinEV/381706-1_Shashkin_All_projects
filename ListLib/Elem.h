@@ -15,6 +15,7 @@ public:
   TElem<T>* GetNext();
   void SetElem(T _elem);
   void SetNext(TElem<T>* _next);
+  TElem<T>* operator=(TElem<T>* obj);
 };//TElem
 // ---------------------------------------------------------------------------
 template <class T>
@@ -53,4 +54,15 @@ template <class T>
 void TElem<T>::SetNext(TElem<T>* _next)
 {
   next = _next;
+}
+// ---------------------------------------------------------------------------
+template <class T>
+TElem<T>* TElem<T>::operator=(TElem<T>* obj)
+{
+  if (this != obj)
+  {
+    elem = obj.elem;
+    next = obj.next;
+  }
+  return this;
 }
