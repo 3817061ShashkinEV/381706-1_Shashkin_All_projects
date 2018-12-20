@@ -95,7 +95,7 @@ TMatrix<T> TMatrix<T>::operator/(TMatrix<T> &obj)
     throw TMyException("Error! Matrices have different sizes!\n");
   double determinant = 1;
   for (int i = 0; i < this->size; i++)
-    determinant *= this->vector[i][0];
+    determinant = determinant*this->vector[i][0];
   if (determinant == 0)
     throw TMyException("Error! Determinant of the right matrix equals zero!\n");
   TMatrix<T> copyObj(obj);
@@ -104,10 +104,11 @@ TMatrix<T> TMatrix<T>::operator/(TMatrix<T> &obj)
   for (int i = 0; i < this->size; i++)
   {
     rez[i][0] = 1;
+    T diag = copyObj[i][0];
     for (int j = 0; j < (this->size - i); j++)
     {
-      copyObj[i][j] = copyObj[i][j]/copyObj[i][0];
-      rez[i][j] = rez[i][j]/copyObj[i][0];
+      copyObj[i][j] = copyObj[i][j]/diag;
+      rez[i][j] = rez[i][j]/diag;
     }
   }
   for (int i = 1; i < this->size; i++)

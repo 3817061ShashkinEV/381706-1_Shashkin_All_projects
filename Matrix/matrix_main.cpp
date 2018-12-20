@@ -4,12 +4,12 @@
 
 int main()
 {
-  TMatrix<int>  matrix1(5), matrix2(5), matrix3(5);
+  TMatrix<double>  matrix1(5), matrix2(5), matrix3(5);
   for(int i=0;i<5;i++)
     for (int j = 0; j < 5 - i; j++)
     {
-      matrix1[i][j] = i + 1;
-      matrix2[i][j] = i + 6;
+      matrix1[i][j] = double(i) + 1.0;
+      matrix2[i][j] = double(i) + 6.0;
     }
   std::cout << "First matrix: \n" << matrix1 << "\n";
   std::cout << "Second matrix: \n" << matrix2 << "\n";

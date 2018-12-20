@@ -62,8 +62,8 @@ TEST(Matrix, can_add_matrices_with_equal_size)
     {
     matrix1[i][j] = i;
     matrix2[i][j] = j;
+    tmp[i][j] = i + j;
     }
-  tmp = matrix1 + matrix2;
   ASSERT_TRUE(tmp == (matrix1 + matrix2));
 }
 // ---------------------------------------------------------------------------
@@ -81,8 +81,8 @@ TEST(Matrix, can_substract_matrices_with_equal_size)
     {
       matrix1[i][j] = i;
       matrix2[i][j] = j;
+      tmp[i][j] = i - j;
     }
-  tmp = matrix1 - matrix2;
   ASSERT_TRUE(tmp == (matrix1 - matrix2));
 }
 // ---------------------------------------------------------------------------
@@ -94,14 +94,19 @@ TEST(Matrix, throw_when_substract_matrices_with_different_size)
 // ---------------------------------------------------------------------------
 TEST(Matrix, can_multiply_matrices_with_equal_size)
 {
-  TMatrix<int> matrix1(5), matrix2(5), tmp(5);
+  TMatrix<int> matrix1(3), matrix2(3), tmp(3);
   for (int i = 0; i < matrix1.GetSize(); i++)
     for (int j = 0; j < matrix1.GetSize() - i; j++)
     {
       matrix1[i][j] = i;
       matrix2[i][j] = j;
     }
-  tmp = matrix1 * matrix2;
+  tmp[0][0] = 0;
+  tmp[0][1] = 0;
+  tmp[0][2] = 0;
+  tmp[1][0] = 0;
+  tmp[1][1] = 1;
+  tmp[2][0] = 0;
   ASSERT_TRUE(tmp == (matrix1 * matrix2));
 }
 // ---------------------------------------------------------------------------
@@ -113,14 +118,19 @@ TEST(Matrix, throw_when_multiply_matrices_with_different_size)
 // ---------------------------------------------------------------------------
 TEST(Matrix, can_divide_matrices_with_equal_size)
 {
-  TMatrix<int> matrix1(3), matrix2(3), tmp(3);
+  TMatrix<double> matrix1(3), matrix2(3), tmp(3);
   for (int i = 0; i < matrix1.GetSize(); i++)
     for (int j = 0; j < matrix1.GetSize() - i; j++)
     {
-      matrix1[i][j] = i + 1;
-      matrix2[i][j] = j + 2;
+      matrix1[i][j] = double(i) + 1.0;
+      matrix2[i][j] = double(j) + 2.0;
     }
-  tmp = matrix1 / matrix2;
+  tmp[0][0] = 0.5;
+  tmp[0][1] = -0.25;
+  tmp[0][2] = -0.125;
+  tmp[1][0] = 1;
+  tmp[1][1] = -0.5;
+  tmp[2][0] = 1.5;
   ASSERT_TRUE(tmp == (matrix1 / matrix2));
 }
 // ---------------------------------------------------------------------------
