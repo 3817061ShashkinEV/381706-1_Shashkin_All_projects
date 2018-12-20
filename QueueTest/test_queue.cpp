@@ -68,5 +68,16 @@ TEST(Queue, throw_when_get_an_element_but_queue_is_empty)
   TQueue<int> queue(10);
   ASSERT_ANY_THROW(queue.Get());
 }
+// ---------------------------------------------------------------------------
+TEST(Queue, can_get_elements_in_the_right_order)
+{
+  TQueue<int> queue(3);
+  queue.Put(10);
+  queue.Put(9);
+  queue.Put(8);
+  EXPECT_EQ(10, queue.Get());
+  EXPECT_EQ(9, queue.Get());
+  EXPECT_EQ(8, queue.Get());
+}
 
 

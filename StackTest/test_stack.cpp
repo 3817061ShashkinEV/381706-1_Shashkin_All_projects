@@ -69,3 +69,14 @@ TEST(Stack, throw_when_put_an_element_but_stack_is_full)
   stack.Put(10);
   ASSERT_ANY_THROW(stack.Put(5));
 }
+// ---------------------------------------------------------------------------
+TEST(Stack, can_get_elements_in_the_right_order)
+{
+  TStack<int> stack(3);
+  stack.Put(10);
+  stack.Put(9);
+  stack.Put(8);
+  EXPECT_EQ(8, stack.Get());
+  EXPECT_EQ(9, stack.Get());
+  EXPECT_EQ(10, stack.Get());
+}
