@@ -8,13 +8,16 @@ class TList
 {
 protected:
   TElem<T>* begin;
+  int size;
 public:
   TList();
   TList(TList<T> &obj);
   void PutBegin(T _elem);
   void PutEnd(T _elem);
+  void PutElem(int _index, T _elem);
   T GetBegin();
   T GetEnd();
+  T GetElem(int _index);
   bool IsEmpty();
   bool IsFull();
 };//TList
@@ -23,6 +26,7 @@ template <class T>
 TList<T>::TList()
 {
   begin = 0;
+  size = 0;
 }
 // ---------------------------------------------------------------------------
 template <class T>
@@ -31,9 +35,13 @@ TList<T>::TList(TList<T> &obj)
   TElem<T>* tmp1 = obj.begin;
   TElem<T>* tmp2;
   if (obj.begin == 0)
+  {
     begin = 0;
+    size = 0;
+  }
   else
   {
+    size = obj.size;
     begin = new TElem<T>(*obj.begin);
     tmp2 = begin;
     while (tmp1->GetNext() != 0)
@@ -58,6 +66,7 @@ void TList<T>::PutBegin(T _elem)
     TElem<T>* tmp= new TElem<T>(_elem, begin);
     begin = tmp;
   }
+  size++;
 }
 // ---------------------------------------------------------------------------
 template <class T>
@@ -72,6 +81,27 @@ void TList<T>::PutEnd(T _elem)
   }
   else
     begin = new TElem<T>(_elem, 0);
+  size++;
+}
+// ---------------------------------------------------------------------------
+template <class T>
+void TList<T>::PutElem(int _index, T _elem)
+{
+  if (_index < 1 || _index > size-1)
+    throw("Error! Index is out of range!\n");
+  else
+  {
+    TElem<T>* tmp = begin;
+    int i = 0;
+    while (i != _index - 1)
+    {
+      tmp->GetNext();
+      i++;
+    }
+    TElem<T>* rez = new TElem<T>(_elem, tmp->GetNext());
+    tmp->SetNext(rez);
+    size++;
+  }
 }
 // ---------------------------------------------------------------------------
 template <class T>
@@ -85,6 +115,7 @@ T TList<T>::GetBegin()
     T tmp2 = begin->TElem<T>::GetElem();
     begin->TElem<T>::GetNext();
     delete tmp1;
+    size--;
     return tmp2;
   }
 
@@ -101,6 +132,7 @@ T TList<T>::GetEnd()
     {
       T rez = begin->TElem<T>::GetElem();
       begin = begin->TElem<T>::GetNext();
+      size--;
       return rez;
     }
     else
@@ -112,6 +144,35 @@ T TList<T>::GetEnd()
       T rez = tmp2->GetElem();
       delete tmp2;
       tmp1->SetNext(0);
+      size--;
+      return rez;
+    }
+  }
+}
+// ---------------------------------------------------------------------------
+template <class T>
+T TList<T>::GetElem(int _index) 
+{
+  if (IsEmpty())
+    throw TMyException("Error! List is empty!/n");
+  else
+  {
+    if (_index < 1 || _index > size-1)
+      throw TMyException("Error! Index is out of range!/n");
+    else
+    {
+      int i = 0;
+      TElem<T> *tmp1 = begin;
+      TElem<T> *tmp2 = begin->GetNext();
+      while (i != _index-1)
+      {
+        tmp1 = tmp2;
+        tmp2 = tmp2->GetNext();
+        i++;
+      }
+      T rez = tmp2->GetElem();
+      tmp1->SetNext(tmp2->GetNext());
+      delete tmp2;
       return rez;
     }
   }

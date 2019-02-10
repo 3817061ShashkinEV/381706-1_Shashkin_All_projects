@@ -69,4 +69,38 @@ TEST(List, throw_when_get_an_element_from_end_but_list_is_empty)
   TList<int> list;
   ASSERT_ANY_THROW(list.GetEnd());
 }
-
+// ---------------------------------------------------------------------------
+TEST(List, can_use_get_an_element_via_index)
+{
+  TList<int> list;
+  list.PutEnd(9);
+  list.PutEnd(8);
+  list.PutEnd(7);
+  list.PutEnd(6);
+  list.PutEnd(5);
+  EXPECT_EQ(5, list.GetElem(4));
+}
+// ---------------------------------------------------------------------------
+TEST(List, can_use_get_an_element_via_index_correctly)
+{
+  TList<int> list;
+  ASSERT_ANY_THROW(list.GetElem(1));
+}
+// ---------------------------------------------------------------------------
+TEST(List, can_use_put_an_element_via_index)
+{
+  TList<int> list;
+  list.PutEnd(9);
+  list.PutEnd(8);
+  list.PutEnd(7);
+  list.PutEnd(6);
+  list.PutEnd(5);
+  list.PutElem(1, 1);
+  EXPECT_EQ(1, list.GetElem(1));
+}
+// ---------------------------------------------------------------------------
+TEST(List, can_use_put_an_element_via_index_correctly)
+{
+  TList<int> list;
+  ASSERT_ANY_THROW(list.GetElem(0));
+}

@@ -15,7 +15,6 @@ public:
   TElem<T>* GetNext();
   void SetElem(T _elem);
   void SetNext(TElem<T>* _next);
-  TElem<T>* operator=(TElem<T>* obj);
 };//TElem
 // ---------------------------------------------------------------------------
 template <class T>
