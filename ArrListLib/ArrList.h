@@ -30,7 +30,7 @@ public:
 };//TArrList
 // ---------------------------------------------------------------------------
 template <class T>
-TArrayList<T>::TArrayList(int _size = 10) : fElem(_size)
+TArrayList<T>::TArrayList(int _size) : fElem(_size)
 {
 	if (_size <= 0)
 		throw TMyException("Error! Size must be positive!\n");
