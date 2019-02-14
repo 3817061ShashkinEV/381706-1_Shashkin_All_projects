@@ -14,6 +14,7 @@ public:
   TQueue(TQueue<T> &obj);
   void Put(T elem);
   T Get();
+  TQueue<T>& operator=(const TQueue<T> &obj);
   bool IsEmpty();
   bool IsFull();
 };//TQueue
@@ -30,6 +31,22 @@ TQueue<T>::TQueue(TQueue<T> &obj) :TStack<T>(obj)
 {
   start = obj.start;
   count = obj.count;
+}
+// ---------------------------------------------------------------------------
+template <class T>
+TQueue<T>& TQueue<T>::operator=(const TQueue<T> &obj)
+{
+	if (this != &obj)
+	{
+		size = obj.size;
+		top = obj.top;
+		start = obj.start;
+		count = obj.count;
+		mas = new T[size];
+		for (int i = 0; i < size; i++)
+			mas[i] = obj.mas[i];
+	}
+	return *this;
 }
 // ---------------------------------------------------------------------------
 template <class T>
