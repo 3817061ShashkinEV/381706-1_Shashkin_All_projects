@@ -20,5 +20,7 @@ script:
   - ./ListTest/ListTest
   - ./MultiStack/MultiStack
   - ./MultiStackTest/MultiStackTest
+  - ./ArrList/ArrList
+  - ./ArrListTest/ArrListTest
 notifications:
   email: false
