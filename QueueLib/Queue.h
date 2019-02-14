@@ -38,13 +38,13 @@ TQueue<T>& TQueue<T>::operator=(const TQueue<T> &obj)
 {
 	if (this != &obj)
 	{
-		size = obj.size;
-		top = obj.top;
+		TStack<T>::size = obj.TStack<T>::size;
+		TStack<T>::top = obj.TStack<T>::top;
 		start = obj.start;
 		count = obj.count;
-		TStack<T>::mas = new T[size];
-		for (int i = 0; i < size; i++)
-			mas[i] = obj.mas[i];
+		TStack<T>::mas = new T[TStack<T>::size];
+		for (int i = 0; i < TStack<T>::size; i++)
+			TStack<T>::mas[i] = obj.TStack<T>::mas[i];
 	}
 	return *this;
 }
