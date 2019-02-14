@@ -42,7 +42,7 @@ TQueue<T>& TQueue<T>::operator=(const TQueue<T> &obj)
 		top = obj.top;
 		start = obj.start;
 		count = obj.count;
-		mas = new T[size];
+		TStack<T>::mas = new T[size];
 		for (int i = 0; i < size; i++)
 			mas[i] = obj.mas[i];
 	}
