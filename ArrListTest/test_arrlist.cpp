@@ -61,12 +61,14 @@ TEST(ArrList, can_put_elem)
 // ---------------------------------------------------------------------------
 TEST(ArrList, can_get_elem)
 {
-	TArrayList<int> arrlist(3);
+	TArrayList<int> arrlist(5);
 	arrlist.PutEnd(1);
 	arrlist.PutEnd(2);
 	arrlist.PutEnd(3);
-	EXPECT_EQ(2, arrlist.Get(1));
-	EXPECT_EQ(3, arrlist.Get(1));
+	arrlist.PutEnd(4);
+	arrlist.PutEnd(5);
+	EXPECT_EQ(3, arrlist.Get(2));
+	EXPECT_EQ(4, arrlist.Get(2));
 }
 // ---------------------------------------------------------------------------
 TEST(ArrList, can_use_isfull_correctly)
