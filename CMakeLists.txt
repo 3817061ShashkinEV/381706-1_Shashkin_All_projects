@@ -32,6 +32,10 @@ set(ArrList ArrList)
 set(ArrListLib ArrListLib)
 set(ArrListTest ArrListTest)
 
+set(StackList StackList)
+set(StackListLib StackListLib)
+set(StackListTest StackListTest)
+
 set(PolishNotation PolishNotation)
 set(PolishNotationLib PolishNotationLib)
 set(PolishNotationTest PolishNotationTest)
@@ -80,6 +84,11 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/ArrListLib)
 add_subdirectory(ArrList)
 add_subdirectory(ArrListLib)
 add_subdirectory(ArrListTest)
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/StackListLib)
+add_subdirectory(StackList)
+add_subdirectory(StackListLib)
+add_subdirectory(StackListTest)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/PolishNotationLib)
 add_subdirectory(PolishNotation)

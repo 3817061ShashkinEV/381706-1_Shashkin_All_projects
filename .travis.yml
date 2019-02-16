@@ -24,5 +24,7 @@ script:
   - ./ArrListTest/ArrListTest
   - ./PolishNotation/PolishNotation
   - ./PolishNotationTest/PolishNotationTest
+  - ./StackList/StackList
+  - ./StackListTest/StackListTest
 notifications:
   email: false
