@@ -142,18 +142,18 @@ bool TStack<T>::IsFull()
 template <class T>
 int TStack<T>::operator!=(const TStack<T>& stack) const
 {
-  return !(*this == s);
+  return !(*this == stack);
 }
 // ---------------------------------------------------------------------------
 template <class T>
 int TStack<T>::operator==(const TStack<T>& stack) const
 {
-  if (top != s.top)
+  if (top != stack.top)
     return 0;
-  if (size != s.size)
+  if (size != stack.size)
     return 0;
   for (int i = 0; i < top; i++)
-    if (mas[i] != s.mas[i])
+    if (mas[i] != stack.mas[i])
       return 0;
   return 1;
 }
