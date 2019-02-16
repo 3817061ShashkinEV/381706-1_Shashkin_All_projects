@@ -32,6 +32,10 @@ set(ArrList ArrList)
 set(ArrListLib ArrListLib)
 set(ArrListTest ArrListTest)
 
+set(PolishNotation PolishNotation)
+set(PolishNotationLib PolishNotationLib)
+set(PolishNotationTest PolishNotationTest)
+
 set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "Configs" FORCE)
 if(NOT CMAKE_BUILD_TYPE) 
  set(CMAKE_BUILD_TYPE Release) 
@@ -77,3 +81,7 @@ add_subdirectory(ArrList)
 add_subdirectory(ArrListLib)
 add_subdirectory(ArrListTest)
 
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/PolishNotationLib)
+add_subdirectory(PolishNotation)
+add_subdirectory(PolishNotationLib)
+add_subdirectory(PolishNotationTest)
