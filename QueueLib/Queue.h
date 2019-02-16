@@ -1,7 +1,6 @@
 #pragma once
 #include <iostream>
-#include <Stack.h>
-#include <../MyExceptionLib/MyException.h>
+#include "Stack.h"
 
 template <class T>
 class TQueue : public TStack<T>
@@ -14,7 +13,7 @@ public:
   TQueue(TQueue<T> &obj);
   void Put(T elem);
   T Get();
-  TQueue<T>& operator=(const TQueue<T> &obj);
+  T ShowTop();
   bool IsEmpty();
   bool IsFull();
 };//TQueue
@@ -32,23 +31,13 @@ TQueue<T>::TQueue(TQueue<T> &obj) :TStack<T>(obj)
   start = obj.start;
   count = obj.count;
 }
+
 // ---------------------------------------------------------------------------
 template <class T>
-TQueue<T>& TQueue<T>::operator=(const TQueue<T> &obj)
+inline T TQueue<T>::ShowTop()
 {
-	if (this != &obj)
-	{
-		TStack<T>::size = obj.TStack<T>::size;
-		TStack<T>::top = obj.TStack<T>::top;
-		start = obj.start;
-		count = obj.count;
-		TStack<T>::mas = new T[TStack<T>::size];
-		for (int i = 0; i < TStack<T>::size; i++)
-			TStack<T>::mas[i] = obj.TStack<T>::mas[i];
-	}
-	return *this;
+	return TStack<T>::mas[start];
 }
-// ---------------------------------------------------------------------------
 template <class T>
 void TQueue<T>::Put(T elem)
 {
@@ -56,8 +45,8 @@ void TQueue<T>::Put(T elem)
     throw TMyException("Error! Queue is full!\n");
   else
   {
-    TStack<T>::mas[start] = elem;
-    start = (start + 1) % TStack<T>::size;
+    TStack<T>::Put(elem);
+    TStack<T>::top = TStack<T>::top % TStack<T>::size;
     count++;
   }
 }
@@ -69,8 +58,8 @@ T TQueue<T>::Get()
     throw TMyException("Error! Queue is empty!\n");
   else
   {
-    T tmp = TStack<T>::mas[TStack<T>::top];
-    TStack<T>::top = (TStack<T>::top + 1) % TStack<T>::size;
+    T tmp = TStack<T>::mas[start];
+    start = (start + 1) % TStack<T>::size;
     count--;
     return tmp;
   }

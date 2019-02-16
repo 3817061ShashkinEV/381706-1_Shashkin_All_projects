@@ -67,7 +67,7 @@ int main()
 
 	catch (TMyException &ex)
 	{
-		ex.what();
+		ex.What();
 	}
 	return 0;
 }

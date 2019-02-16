@@ -22,7 +22,7 @@ int main()
   }
   catch (TMyException &ex)
   {
-    ex.what();
+    ex.What();
   }
   std::cout << "-----------------------------------------------------------------------\n";
   try
@@ -32,7 +32,7 @@ int main()
   }
   catch (TMyException &ex)
   {
-    ex.what();
+    ex.What();
   }
   std::cout << "-----------------------------------------------------------------------\n";
   try
@@ -42,7 +42,7 @@ int main()
   }
   catch (TMyException &ex)
   {
-    ex.what();
+    ex.What();
   }
   std::cout << "-----------------------------------------------------------------------\n";
   try
@@ -52,7 +52,7 @@ int main()
   }
   catch (TMyException &ex)
   {
-    ex.what();
+    ex.What();
   }
  
   /*std::cout << "-----------------------------input/output----------------------------------\n";

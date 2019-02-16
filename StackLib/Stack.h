@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-#include <../MyExceptionLib/MyException.h>
+#include "../MyExceptionLib/MyException.h"
 
 template <class T>
 class TStack
@@ -15,8 +15,13 @@ public:
   ~TStack();
   void Put(T elem);
   T Get();
+  T ShowTop();
+  int GetSize();
   bool IsEmpty();
   bool IsFull();
+  TStack<T>& operator=(const TStack<T> &obj);
+  int operator!=(const TStack<T>& stack) const;
+  int operator==(const TStack<T>& stack) const;
 };//TStack
 // ---------------------------------------------------------------------------
 template <class T>
@@ -58,9 +63,38 @@ TStack<T>::TStack(TStack<T> &obj)
 template <class T>
 TStack<T>::~TStack()
 {
-  if (mas != 0)
-    delete[] mas;
-  mas = NULL;
+	if(mas!=0)
+		delete[] mas;
+}
+// ---------------------------------------------------------------------------
+template <class T>
+TStack<T>& TStack<T>::operator=(const TStack<T> &obj)
+{
+	if (this != &obj)
+	{
+		delete[] mas;
+		top = obj.top;
+		size = obj.size;
+		mas = new T[size];
+		for (int i = 0; i < size; i++)
+			mas[i] = obj.mas[i];
+	}
+	return *this;
+}
+// ---------------------------------------------------------------------------
+template <class T>
+T TStack<T>::ShowTop()
+{
+	if (IsEmpty())
+		throw TMyException("Error! Stack is empty!\n");
+	else
+		return mas[top - 1];
+}
+// ---------------------------------------------------------------------------
+template <class T>
+int TStack<T>::GetSize()
+{
+	return size;
 }
 // ---------------------------------------------------------------------------
 template <class T>
@@ -103,4 +137,23 @@ bool TStack<T>::IsFull()
     return true;
   else
     return false;
+}
+// ---------------------------------------------------------------------------
+template <class T>
+int TStack<T>::operator!=(const TStack<T>& stack) const
+{
+  return !(*this == s);
+}
+// ---------------------------------------------------------------------------
+template <class T>
+int TStack<T>::operator==(const TStack<T>& stack) const
+{
+  if (top != s.top)
+    return 0;
+  if (size != s.size)
+    return 0;
+  for (int i = 0; i < top; i++)
+    if (mas[i] != s.mas[i])
+      return 0;
+  return 1;
 }
