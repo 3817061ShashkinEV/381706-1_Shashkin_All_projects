@@ -19,7 +19,7 @@ public:
 };//TStackList
 // ---------------------------------------------------------------------------
 template <class T>
-TStackList<T>::TStackList(int _len) : TList()
+TStackList<T>::TStackList(int _len) : TList<T>()
 {
 	if (_len <= 0)
 		throw TMyException("Error! Incorrect size!\n");
