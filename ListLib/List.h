@@ -47,8 +47,8 @@ TList<T>::TList(TList<T> &obj)
     while (tmp1->GetNext() != 0)
     {
       tmp2->SetNext(new TElem<T>(*(tmp1->GetNext())));
-      tmp1->GetNext();
-      tmp2->GetNext();
+      tmp1=tmp1->GetNext();
+      tmp2=tmp2->GetNext();
     }
   }
 }
@@ -56,6 +56,8 @@ TList<T>::TList(TList<T> &obj)
 template <class T>
 void TList<T>::PutBegin(T _elem)
 {
+	if (this->IsFull())
+		throw TMyException("Error! List is full!\n");
   if (begin == 0)
   {
     TElem<T>* tmp = new TElem<T>(_elem, 0);
@@ -72,6 +74,8 @@ void TList<T>::PutBegin(T _elem)
 template <class T>
 void TList<T>::PutEnd(T _elem)
 {
+	if (this->IsFull())
+		throw TMyException("Error! List is full!\n");
   if (begin != 0)
   {
     TElem<T>* tmp = begin;
@@ -87,6 +91,8 @@ void TList<T>::PutEnd(T _elem)
 template <class T>
 void TList<T>::PutElem(int _index, T _elem)
 {
+	if (this->IsFull())
+		throw TMyException("Error! List is full!\n");
   if (_index < 1 || _index > size-1)
     throw("Error! Index is out of range!\n");
   else
@@ -113,41 +119,43 @@ T TList<T>::GetBegin()
   {
     TElem<T>* tmp1 = begin;
     T tmp2 = begin->TElem<T>::GetElem();
-    begin->TElem<T>::GetNext();
+    begin=begin->TElem<T>::GetNext();
     delete tmp1;
     size--;
     return tmp2;
   }
-
 }
 // ---------------------------------------------------------------------------
 template <class T>
 T TList<T>::GetEnd()
 {
-  if(IsEmpty())
-    throw TMyException("Error! List is empty!\n");
-  else
-  {
-    if (begin->TElem<T>::GetNext() == 0)
-    {
-      T rez = begin->TElem<T>::GetElem();
-      begin = begin->TElem<T>::GetNext();
-      size--;
-      return rez;
-    }
-    else
-    {
-      TElem<T> *tmp1 = begin;
-      while (tmp1->GetNext()->GetNext() != 0)
-        tmp1 = tmp1->GetNext();
-      TElem<T> *tmp2 = tmp1->GetNext();
-      T rez = tmp2->GetElem();
-      delete tmp2;
-      tmp1->SetNext(0);
-      size--;
-      return rez;
-    }
-  }
+	if (IsEmpty())
+		throw TMyException("Error! List is empty!\n");
+	else
+	{
+		size--;
+		TElem<T>* tmp1 = begin;
+		TElem<T>* tmp2 = begin->GetNext();
+		if (tmp2 == 0)
+		{
+			T tmp3 = tmp1->TElem<T>::GetElem();
+			delete tmp1;
+			begin = 0;
+			return tmp3;
+		}
+		else
+		{
+			while (tmp2->GetNext() != 0)
+			{
+				tmp1 = tmp2;
+				tmp2 = tmp2->GetNext();
+			}
+			T tmp3 = tmp2->GetElem();
+			delete tmp2;
+			tmp1->SetNext(0);
+			return tmp3;
+		}
+	}
 }
 // ---------------------------------------------------------------------------
 template <class T>
@@ -162,6 +170,7 @@ T TList<T>::GetElem(int _index)
     else
     {
       int i = 0;
+			size--;
       TElem<T> *tmp1 = begin;
       TElem<T> *tmp2 = begin->GetNext();
       while (i != _index-1)
@@ -190,19 +199,20 @@ bool TList<T>::IsEmpty()
 template <class T>
 bool TList<T>::IsFull()
 {
-  try
-  {
-    TElem<T>* tmp = new TElem<T>();
-    if (tmp == 0)
-      return false;
-    else
-    {
-      delete tmp;
-      return true;
-    }
-  }
-  catch (...)
-  {
-    return false;
-  }
+	try
+	{
+		TElem<T>* tmp = new TElem<T>();
+		if (tmp == NULL)
+			return true;
+		else
+		{
+			delete tmp;
+			return false;
+		}
+	}
+	catch (...)
+	{
+		return false;
+	}
+	return true;
 }

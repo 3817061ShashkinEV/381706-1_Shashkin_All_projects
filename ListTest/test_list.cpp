@@ -51,13 +51,6 @@ TEST(List, can_use_isempty_incorrectly)
   ASSERT_FALSE(list.IsEmpty());
 }
 // ---------------------------------------------------------------------------
-TEST(List, can_use_isfull_correctly)
-{
-  TList<int> list;
-  list.PutBegin(5);
-  ASSERT_TRUE(list.IsFull());
-}
-// ---------------------------------------------------------------------------
 TEST(List, throw_when_get_an_element_from_begin_but_list_is_empty)
 {
   TList<int> list;
