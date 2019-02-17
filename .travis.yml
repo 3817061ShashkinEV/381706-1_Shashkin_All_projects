@@ -26,5 +26,7 @@ script:
   - ./PolishNotationTest/PolishNotationTest
   - ./StackList/StackList
   - ./StackListTest/StackListTest
+  - ./Polynomial/Polynomial
+  - ./PolynomialTest/PolynomialTest
 notifications:
   email: false
