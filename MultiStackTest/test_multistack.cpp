@@ -83,11 +83,11 @@ TEST(MultiStack, can_create_copied_multistack)
   ASSERT_NO_THROW(TMStack<int>multistack2(multistack1));
 }
 // ---------------------------------------------------------------------------
-/*TEST(MultiStack, can_put_elem)
+TEST(MultiStack, can_put_elem)
 {
-  TMStack<int> multistack(5, 10);
-  ASSERT_NO_THROW(multistack.PutElem(0,1));
-}*/
+  TMStack<int> multistack(5, 25);
+  ASSERT_NO_THROW(multistack.SetElem(1,2));
+}
 // ---------------------------------------------------------------------------
 TEST(MultiStack, can_get_size)
 {
@@ -95,11 +95,61 @@ TEST(MultiStack, can_get_size)
   EXPECT_EQ(10, multistack.GetSize());
 }
 // ---------------------------------------------------------------------------
-/*TEST(MultiStack, can_get_elem)
+TEST(MultiStack, can_get_elem)
 {
   TMStack<int> multistack(5, 10);
-  multistack.PutElem(1, 6);
+  multistack.SetElem(1, 6);
   EXPECT_EQ(6, multistack.GetElem(1));
-}*/
+}
 // ---------------------------------------------------------------------------
+TEST(MultiStack, can_repack)
+{
+	TMStack<int> multistack(2, 6);
+	multistack.SetElem(0, 6);
+	multistack.SetElem(0, 5);
+	multistack.SetElem(1, 2);
+	ASSERT_NO_THROW(multistack.SetElem(0, 4));
+	EXPECT_EQ(4, multistack.GetElem(0));
+}
+// ---------------------------------------------------------------------------
+TEST(MultiStack, can_use_isempty_correctly)
+{
+	TMStack<int> multistack(5, 10);
+	ASSERT_TRUE(multistack.IsEmpty(0));
+}
+// ---------------------------------------------------------------------------
+TEST(MultiStack, can_use_isempty_incorrectly)
+{
+	TMStack<int> multistack(5, 10);
+	multistack.SetElem(0, 1);
+	ASSERT_FALSE(multistack.IsEmpty(0));
+}
+// ---------------------------------------------------------------------------
+TEST(MultiStack, can_use_isfull_correctly)
+{
+	TMStack<int> multistack(5, 25);
+	multistack.SetElem(0, 1);
+	multistack.SetElem(0, 2);
+	multistack.SetElem(0, 3);
+	multistack.SetElem(0, 4);
+	multistack.SetElem(0, 5);
+	ASSERT_TRUE(multistack.IsFull(0));
+}
+// ---------------------------------------------------------------------------
+TEST(MultiStack, can_use_isfull_incorrectly)
+{
+	TMStack<int> multistack(5);
+	ASSERT_FALSE(multistack.IsFull(0));
+}
+// ---------------------------------------------------------------------------
+TEST(MultiStack, can_get_elements_in_the_right_order)
+{
+	TMStack<int> multistack(5, 10);
+	multistack.SetElem(0, 10);
+	multistack.SetElem(0, 9);
+	multistack.SetElem(0, 8);
+	EXPECT_EQ(8, multistack.GetElem(0));
+	EXPECT_EQ(9, multistack.GetElem(0));
+	EXPECT_EQ(10, multistack.GetElem(0));
+}
 

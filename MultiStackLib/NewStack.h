@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include "Stack.h"
-#include <../MyExceptionLib/MyException.h>
+#include "MyException.h"
 
 template <class T>
 class TNewStack :public TStack<T>
@@ -13,7 +13,7 @@ public:
   int GetFreeMem();
   int GetSize();
   int GetTop();
-  void Put(T _elem);
+  void PutElem(T _elem);
   T Get();
 };//TNewStack
 // ---------------------------------------------------------------------------
@@ -24,10 +24,10 @@ TNewStack<T>::TNewStack(int _size, T* _mas)
     throw TMyException("Error! Size must be positive!\n");
   else 
   {
+		TStack<T>::top = 0;
     TStack<T>::size = _size;
-    TStack<T>::top = 0;
-    TStack<T>::mas = _mas;
-   
+		TStack<T>::mas = _mas;
+    
   }
 }
 // ---------------------------------------------------------------------------
@@ -67,7 +67,7 @@ int TNewStack<T>::GetTop()
 }
 // ---------------------------------------------------------------------------
 template <class T>
-void TNewStack<T>::Put(T _elem)
+void TNewStack<T>::PutElem(T _elem)
 {
   TStack<T>::mas[TStack<T>::top] = _elem;
   TStack<T>::top++;
