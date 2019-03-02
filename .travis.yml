@@ -8,8 +8,25 @@ before_script:
 script:
   - cmake ../381706-1_Shashkin_All_projects
   - make -j
-  - cd ./Vector
-  - cd ../
-  - cd ./VectorTest
+  - ./Vector/Vector
+  - ./VectorTest/VectorTest
+  - ./Matrix/Matrix
+  - ./MatrixTest/MatrixTest
+  - ./Stack/Stack
+  - ./StackTest/StackTest
+  - ./Queue/Queue
+  - ./QueueTest/QueueTest
+  - ./List/List
+  - ./ListTest/ListTest
+  - ./MultiStack/MultiStack
+  - ./MultiStackTest/MultiStackTest
+  - ./ArrList/ArrList
+  - ./ArrListTest/ArrListTest
+  - ./PolishNotation/PolishNotation
+  - ./PolishNotationTest/PolishNotationTest
+  - ./StackList/StackList
+  - ./StackListTest/StackListTest
+  - ./Polynomial/Polynomial
+  - ./PolynomialTest/PolynomialTest
 notifications:
   email: false
