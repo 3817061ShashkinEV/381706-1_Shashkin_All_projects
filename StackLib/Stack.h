@@ -14,6 +14,7 @@ public:
   TStack(TStack<T> &obj);
   ~TStack();
   void Put(T elem);
+  void Clear();
   T Get();
   T ShowTop();
   int GetSize();
@@ -157,4 +158,12 @@ int TStack<T>::operator==(const TStack<T>& stack) const
     if (mas[i] != stack.mas[i])
       return 0;
   return 1;
+}
+// ---------------------------------------------------------------------------
+template <class T>
+void TStack<T>::Clear()
+{
+	if (mas != 0)
+		delete[] mas;
+	mas = NULL;
 }
