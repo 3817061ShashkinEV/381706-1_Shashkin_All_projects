@@ -6,7 +6,7 @@ before_script:
   - mkdir ../build
   - cd ../build
 script:
-  - cmake ../381706-1_Shashkin_All_projects
+  - cmake ../Shashkin_All_Labs
   - make -j
   - ./Vector/Vector
   - ./VectorTest/VectorTest
