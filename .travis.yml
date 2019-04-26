@@ -28,5 +28,8 @@ script:
   - ./StackListTest/StackListTest
   - ./Polynomial/Polynomial
   - ./PolynomialTest/PolynomialTest
+  - ./ViewingTable/ViewingTable
+  - ./ViewingTableTest/ViewingTableTest
+
 notifications:
   email: false
