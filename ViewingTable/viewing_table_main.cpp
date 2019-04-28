@@ -3,7 +3,7 @@
 
 int main()
 {
-	TTable<int> table(5);
+	TTable<int> table(20000);
 	TElem<int> elem;
 	table.Put("key1", 1);
 	table.Put("key2", 3);
