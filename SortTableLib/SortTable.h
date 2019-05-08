@@ -40,7 +40,7 @@ TSortTable<T>::TSortTable(string* _keys, T* _data, int _size)
 }
 // ---------------------------------------------------------------------------
 template<class T>
-TSortTable<T>::TSortTable(int _size = 10)
+TSortTable<T>::TSortTable(int _size)
 {
   if (_size <= 0)
     throw TMyException("Error! Size must be positive!\n");
