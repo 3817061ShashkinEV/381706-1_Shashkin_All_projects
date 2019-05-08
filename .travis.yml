@@ -28,5 +28,7 @@ script:
   - ./StackListTest/StackListTest
   - ./Polynomial/Polynomial
   - ./PolynomialTest/PolynomialTest
+  - ./SortTable/SortTable
+  - ./SortTableTest/SortTableTest
 notifications:
   email: false
