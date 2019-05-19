@@ -10,7 +10,7 @@ protected:
   int size;
   int count;
 public:
-  TSortTable(string* _keys, T* _data, int _size);
+  TSortTable(string* _keys, T* _data, int _size, char _sort);
   TSortTable(int _size = 10);
   TSortTable(TSortTable<T> &obj);
   int Put(string _key, T _data);
@@ -22,10 +22,11 @@ public:
   int GetSize();
   void SetCount(int _count);
   int GetCount();
+  void QuickSort(int l, int r);
 };//TSortTable
 // ---------------------------------------------------------------------------
 template<class T>
-TSortTable<T>::TSortTable(string* _keys, T* _data, int _size)
+TSortTable<T>::TSortTable(string* _keys, T* _data, int _size, char _sort)
 {
   if (_size <= 0)
     throw TMyException("Error! Size must be positive!\n");
@@ -36,6 +37,42 @@ TSortTable<T>::TSortTable(string* _keys, T* _data, int _size)
     mas = new TSortElem<T>[size];
     for (int i = 0; i < size; i++)
       Put(_keys[i], _data[i]);
+    switch (_sort)
+    {
+    case 'b':
+    {
+      TSortElem<T> tmp;
+      for (int i = 0; i < size; i++)
+      {
+        if (i != size - 1)
+          if (mas[i] > mas[i + 1])
+          {
+            tmp = mas[i];
+            mas[i] = mas[i + 1];
+            mas[i + 1] = tmp;
+          }
+      }
+      break;
+    }
+    case 'q':
+    {
+      QuickSort(0, size - 1);
+      break;
+    }
+    case 'i':
+    {
+      TSortElem<T> tmp;
+      int j;
+      for (int i = 0; i < size; i++)
+      {
+        tmp = mas[i];
+        for (j = i - 1; j >= 0 && mas[j] > tmp; j--)
+          mas[j + 1] = mas[j];
+        mas[j + 1] = tmp;
+      }
+      break;
+    }
+    }
   }
 }
 // ---------------------------------------------------------------------------
@@ -210,4 +247,31 @@ template <class T>
 int TSortTable<T>::GetCount()
 {
   return count;
+}
+// ---------------------------------------------------------------------------
+template <class T>
+void TSortTable<T>::QuickSort(int l, int r)
+{
+  int left=l, right=r;
+  TSortElem<T> mid = mas[(left + right) / 2];
+  TSortElem<T> tmp;
+  do
+  {
+    while ((mas[left] < mid) && (left < r))
+      left++;
+    while ((mid < mas[right]) && (right > l))
+      right--;
+    if (left <= right)
+    {
+      tmp = mas[left];
+      mas[left] = mas[right];
+      mas[right] = tmp;
+      left++;
+      right--;
+    }
+  } while (left <= right);
+  if (l < right) 
+    QuickSort(l, right);
+  if (left < r) 
+    QuickSort(left, r);
 }

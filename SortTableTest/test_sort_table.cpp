@@ -62,7 +62,7 @@ TEST(SortTable, can_create_table_and_fill_table)
   keys[4] = "five";
   for (int i = 0; i < 5; i++)
     data[i] = i;
-  ASSERT_NO_THROW(TSortTable<int> table(keys, data, 5));
+  ASSERT_NO_THROW(TSortTable<int> table(keys, data, 5, 'q'));
 }
 // ---------------------------------------------------------------------------
 TEST(SortTable, can_create_table)
