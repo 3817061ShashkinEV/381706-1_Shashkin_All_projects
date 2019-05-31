@@ -72,8 +72,8 @@ TEST(Line, can_get_A_and_B_points)
   TPoint A(1, 2);
   TPoint B(3, 4);
   TLine line(A,B);
-  ASSERT_TRUE(A == line.GetA());
-  ASSERT_TRUE(B == line.GetB());
+  ASSERT_TRUE(line.GetA() == A);
+  ASSERT_TRUE(line.GetB() == B);
 }
 // ---------------------------------------------------------------------------
 TEST(Line, can_set_A_and_B_points)
@@ -83,8 +83,8 @@ TEST(Line, can_set_A_and_B_points)
   TLine line;
   line.SetA(A);
   line.SetB(B);
-  ASSERT_TRUE(A == line.GetA());
-  ASSERT_TRUE(B == line.GetB());
+  ASSERT_TRUE(line.GetA() == A);
+  ASSERT_TRUE(line.GetB() == B);
 }
 // ---------------------------------------------------------------------------
 TEST(Plex, can_create_plex)
