@@ -1,28 +1,39 @@
 #pragma once
-#include "MyException.h"
+#include <iostream>
 
-class TNode
+class TNode 
 {
 protected:
-	TNode* nextLevel;// указатель на следующий уровень
-	TNode* neighbor;// указатель на соседа
-	int level; // уровень листочка
-	char data; // данное листочка
-	static TNode* start; // начало
-	static TNode* end; // конец
-	static TNode* _free; // пустое место
-	static char* mas; // набор байтов
-	static int sizeMas; // размер массива, где будет вся наша память
-
+  TNode* nextLevel;
+  TNode* neighbour;
+  int level;
+  char data;
+  static TNode* start;
+  static TNode* end;
+  static TNode* _free;
+  static char* mas;
+  static int sizeMas;
 public:
-	TNode(char c);
-	TNode(char* str);
-	TNode(int _level);
-	TNode(TNode &obj);
-	void Init(int _size); // инициализация статических полей
-	void* operator new (size_t n);
-	void operator delete (void* a);
-	TNode* GetNeighbor();
-	TNode* GetNextLevel();
-	static void GarbageCollector(); // сборщик мусора
-}; //TNode
+  TNode(char _c);
+  TNode(std::string _str);
+  TNode(int _level);
+  TNode(TNode &obj);
+  TNode& operator=(const TNode &obj);
+  TNode& operator+=(TNode &obj);
+  TNode& operator+=(char _c);
+  TNode& operator+=(char* _c);
+  char* ToStr();
+  TNode* Clone();
+  int GetLevel();
+  void SetLevel(int _level);
+  TNode* GetNextLevel();
+  void SetNextLevel(TNode* _nextLevel);
+  TNode* GetNeighbour();
+  void SetNeighbour(TNode* _neighbour);
+  char GetData();
+  void SetData(char _c);
+  void Init(int _size);
+  void* operator new (size_t n);
+  void operator delete (void* a);
+  static void GC();
+};//TNode

@@ -1,15 +1,24 @@
+#pragma once
 #include "Node.h"
+#include "NodeIter.h"
+#include <iostream>
 
 class TText
 {
 protected:
-	TNode* root;
+  TNode *root;
 public:
-	TText();
-	char* Copy(int start, int n);
-	char* Del(int start, int n);
-	void Ins(TNode* start, TNode* d); // вставка
-	TNode* Find(char* a); // поиск с возратом узла
-	int FindIndex(char* a); // поиск с возвратом номера буквы
-
+  TText();
+  TText(TNode* r);
+  TText(TText &obj);
+  TNode* GetRoot();
+  char* Copy(int _start, int _n);
+  void Del(TNode* _start, int _n);
+  void Ins(TNode* _start, TNode* _d);
+  void Ins(TNode* _start, std::string _str);
+  void Ins(TNode* _start, char _c);
+  TNode* Find(char* _a);
+  int FindIndex(char* _a);
+  int GetCount();
+  friend ostream& operator<<(ostream& ostr, const TText &obj);
 };//TText
